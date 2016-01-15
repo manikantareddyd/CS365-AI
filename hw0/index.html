@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../assets/img/mani.png">
+
+	
+    <title>HW0 CS365 | Manikanta Reddy D</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+
+    <link href="../assets/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../assets/css/main.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- Static navbar -->
+    <div class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">Manikanta Reddy D</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://ManikantaReddyD.github.io/index.html">About</a></li>
+            <!--<li><a href="!work.html">Work</a></li>
+            <li><a href="!feats.html">Feats</a></li>
+            <li><a href="!contact.html">contact</a></li>-->
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+	
+	<!-- +++++ Post +++++ -->
+	<div id="white">
+	    <div class="container">
+	    	<div class="row">
+	    		<div class="col-lg-12 ">
+	    		<h1>Psychotherapist chatbot - Doctor.el</h1>
+        		<p>In this assignment we study the behaviour of the Emacs Psychotherapist programme and thereby make some changes to the source of program <i>doctor.el</i> and hope to bring about some change in the way how the program interacts with us.</p>
+        		<a class="btn btn-default" href="http://home.iitk.ac.in/~manikant/cs365/index.html" role="button">&laquo; Back</a>
+        	</div>
+	    </div>
+		<div class="row">
+				<div class="col-lg-12">
+					<h2>Basic Functioning of ELIZA</h2>
+	    <p>
+	    	Any input given by the user is taken by the doctor and is tokenized and is interpreted by different fucntions.
+	    </p>
+	   	<p>for example</p>
+	   	<pre>
+	   		(doctor-put-meaning maternal 'family)
+			(doctor-put-meaning paternal 'family)
+			(doctor-put-meaning stab 'death)
+			(doctor-put-meaning murder 'death)
+			
+	   	</pre>	
+	   	<p><br>
+	   		These four lines assign maternal and paternal a <i>meaning</i> family and stab, murder as <i>death</i>.
+	   	</p>
+	   	<pre>
+	   		(defun doctor-family ()
+	  		(doctor-possess doctor-sent doctor-found)
+	  		(doctor-type (doc$ doctor--famlst)))
+	   	</pre> 
+	   	<p>
+	   		<br>This function doctor-family calls doctor--famlst whenever maternal or paternal appears in the input!
+	   	</p>
+	   	<pre>
+	   		(set (make-local-variable 'doctor--famlst)
+	        		'((tell me (doc$ doctor--something) about (doc// doctor-owner) family \.)
+		 		(you seem to dwell on (doc// doctor-owner) family \.)
+		 		((doc$ doctor--areyou) hung up on (doc// doctor-owner) family \?)))
+	   	</pre>
+	   	<p>
+	   		<br>Now the <i>famlst</i> function picks from one of the 3 responses and displays us and then cycles to next response for fucture references of family.
+	   	</p> 
+
+	   	<h2>Its Intelligence</h2>
+	   	<p>
+	   		The intelligence of the program heavily relies on the fact that it is a Psychotherapist.
+	   	</p>
+	   	<p>
+	   		As can easily be observed it replies to a statement with an other question in general, that too with very intimate, asking us about more intricate details of the statement made. By doing so it gives us an illusion of a high class therapist with a good charm.    
+	   	</p>
+
+	   	<p> Here is an excerpt from a sample conversation</p>
+		<pre>
+			I am the psychotherapist.  Please, describe your problems.  Each time you are finished talking, type RET twice.
+
+			How are you?
+			 
+			I'm ok.  Tell me about yourself.
+			 
+			I'm sad today.
+			 
+			Why do you say you are sad today?
+			 
+			I don't know.
+			 
+			Is it because of your plans that you say you do not know?
+			 
+			I'm taking cocaine
+			 
+			Do you use cocaine often?
+			 
+			yes
+			 
+			I see...  Well, what makes you believe this is so?
+			 
+			I'm depressed
+			 
+			Are you depressed often?
+			 
+			Yes
+			 
+			Yes, hmmm... so, are you sure that this is so?
+
+			Yes
+		 
+			I understand.  So do you really think this is so?
+		</pre>
+		<p>
+			As you can see, ELIZA compells the user to give a repy which is sort of the same thing done by a therapist.
+		</p>
+		<h2>Shortcomings</h2>
+		<p>
+			Clearly ELIZA gets struck with repetetive responses and after a point it gets annoying, but that might actually be the point. 
+		</p>
+		<p>
+			It sometimes doesn't get positivity.
+		</p>
+		<pre>
+			I'm happy today
+
+			Do you get happy often?
+
+			My grades are good nowadays.
+
+			Tell me about your grades.
+
+			They are really good
+
+			Why do you say they are really good?
+		</pre>
+		<h2>Improvements I brought about</h2>
+		<p>
+			One of the problems I've seen is as follows
+		</p>
+	 	<pre>
+			I'm from Kanpur.
+
+			Why do you say you are from kanpur?
+	 	</pre>
+	 	<p>
+	 		This is not what we expect. we expect a greeting, so I tried fixing it by defining new functions for location identification.
+	 	</p>
+	 	<h3>Improvised conversation</h3>
+	 	<pre>
+	 		I'm from Delhi
+
+			Hi there from Delhi.
+
+			My home is in Delhi
+
+			Oh, Delhi must be a nice place to live.
+
+			I used to live in Delhi
+
+			I once lived in Delhi too.
+
+			I came here from Delhi
+
+			Good.
+	 	</pre>
+	 	<p>
+	 		I built a list of replies to be given whenever a person says he is from so and so location and they keep cycling just like other doctor replies.
+	 	</p>
+	 	<h2>Other shortcomings</h2>
+	 	<p>
+	 		Its replies itself!<br>
+	 		If you don't enter any text and press RET it assumes what it said as the input and then replies LOL.
+	 	</p>
+	 	<pre>
+			I would appreciate it if you would continue.
+
+			Why do you say you would appreciate it if I would continue?
+	 	</pre>
+	 	<p>
+	 		No hardcoded Dictionary!<br>
+	 		If you hit with random words it assumes they are nouns!
+	 	</p>
+	 	<pre>
+	 		bum bhole nath
+
+			Why do you say bum bhole nath?
+	 	</pre>
+
+	 	<h2>Conclusion</h2>
+	 	<p>
+	 		It is very nice attempt at creating an AI, the ascpect of memory and keeping the conversation going really make it feel human.
+	 	</p>
+
+	 	<h2>Submission</h2>
+	 	<p>
+	 		Please find here the modified doctor.el file
+	 	</p>
+	 	<p>
+	 		<a class="btn btn-default" href="http://home.iitk.ac.in/~manikant/cs365/hw0/doctor.el" target="_blank" role="button">doctor.el &raquo;</a>
+	 	</p>
+	
+		<hr>
+				</div>
+
+			</div><!-- /row -->
+	    </div> <!-- /container -->
+	</div><!-- /white -->
+	
+	
+	
+	
+	<!-- +++++ Footer Section +++++ -->
+	
+	<div id="footer">
+		<div class="container">
+			<div class="row mt centered">
+				<div class="col-lg-4">
+					<h4>My Bunker</h4>
+					<p>
+						E 249, Hall 2, IIT Kanpur<br/>
+						+91 7753058439 <br/>
+						Kanpur, India.
+						<br>
+						manikanta.reddy.d@live.com
+						<br>
+						manikanta.d.reddy@gmail.com
+					</p>
+				</div><!-- /col-lg-4 -->
+				
+				<div class="col-lg-8">
+					<h4>Stalk Me</h4>
+					            <div class="col-lg-2">
+					            <a href="https://github.com/ManikantaReddyD">
+                                <i class="fa fa-github fa-5x"></i>
+                                <p >GitHub</p>
+                                </a>
+                                </div>
+                                <div class="col-lg-2">
+					            <a href="https://bitbucket.org/ManikantaReddyD/">
+                                <i class="fa fa-bitbucket fa-5x" ></i>
+                                <p >Bitbucket</p>
+                                </a>
+                                </div>
+                                <div class="col-lg-2">
+					            <a href="https://www.facebook.com/profile.php?id=100001336039395">
+                                <i class="fa fa-facebook fa-5x"></i>
+                                <p >Facebook</p>
+                                </a>
+                                </div>
+                                <div class="col-lg-2">
+					            <a href="https://twitter.com/ManikantaReddyD">
+                                <i class="fa fa-twitter fa-5x"></i>
+                                <p >Twitter</p>
+                                </a>
+                                </div>
+                                <div class="col-lg-2">
+					            <a href="https://in.linkedin.com/in/manikantadreddyd">
+                                <i class="fa fa-linkedin fa-5x"></i>
+                                <p >LinkedIn</p>
+                                </a>
+                                </div>
+                                <div class="col-lg-2">
+					            <a href="http://www.last.fm/user/ManikantaReddy">
+                                <i class="fa fa-lastfm fa-5x"></i>
+                                <p >Last.FM</p>
+                                </a>
+                                </div>
+				</div>
+			
+			</div>
+		
+		</div>
+	</div>
+	
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../assets/js/bootstrap.min.js"></script>
+  </body>
+</html>
